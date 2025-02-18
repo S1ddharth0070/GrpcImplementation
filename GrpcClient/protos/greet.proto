@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+package greet;
+
+// Import the Empty message definition from Google Protobuf
+import "google/protobuf/empty.proto";
+
+// The greeting service definition.
+service Greeter {
+  // Retrieves all movies
+  rpc GetAllMovies (google.protobuf.Empty) returns (GetAllMoviesResponse);
+  
+  // Adds a new movie
+  rpc AddMovie (AddMovieRequest) returns (AddMovieResponse);
+  
+  // Retrieves a movie by name
+  rpc GetMovieByName (GetMovieByNameRequest) returns (GetMovieByNameResponse);
+}
+
+// Response message for GetAllMovies
+message GetAllMoviesResponse {
+  repeated Movie movies = 1;
+}
+
+// Request message for AddMovie
+message AddMovieRequest {
+  string name = 1;
+  string genre = 2;
+  int32 releaseYear = 3;
+}
+
+// Response message for AddMovie
+message AddMovieResponse {
+  string message = 1;
+}
+
+// Request message for GetMovieByName
+message GetMovieByNameRequest {
+  string name = 1;
+}
+
+// Response message for GetMovieByName
+message GetMovieByNameResponse {
+  Movie movie = 1;
+}
+
+// Movie message definition
+message Movie {
+  string name = 1;
+  string genre = 2;
+  int32 releaseYear = 3;
+}
